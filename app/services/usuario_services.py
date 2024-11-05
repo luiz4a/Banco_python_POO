@@ -9,12 +9,8 @@ class UsuarioService:
         try:
             usuario = Usuario (nome = nome, email=email, senha=senha)
             
-            novo_usuario = self.repository.pesquisar_usuario_por_email(usuario.email)
-            
-            if not novo_usuario:
-                print("Usuário já cadastrado!")
-            return
-            
+            consulta_usuario = self.repository.pesquisar_usuario_por_email(usuario.email)
+                       
             if consulta_usuario:
                 print("Usuário já Existe no Banco de dados.")
                 return
