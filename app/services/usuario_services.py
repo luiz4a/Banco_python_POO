@@ -19,7 +19,8 @@ class UsuarioService:
         except TypeError as erro:
             print(f"Erro ao salvar o usuário: {erro}")
         except Exception as erro:
-            print(f"Ocorreu um erro inesperado {erro}")
+            print(f"Ocorreu um erro inesperado,
+                   {erro}")
 
     def listar_todos_usuario(self):
         return self.repository.listar_usuarios()
