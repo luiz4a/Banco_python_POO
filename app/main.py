@@ -1,8 +1,11 @@
-from app.models.usuario_models import Usuario
-from repositories.usuario_repositories import UsuarioRepository
-from services.usuario_services import UsuarioService
-from app.config.database import Session 
+import os
+import sys 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),'..')))
 
+from app.models.usuario_models import Usuario
+from app.repositories.usuario_repositories import UsuarioRepository
+from app.services.usuario_services import UsuarioService
+from app.config.database import Session 
 
 def main():
     session = Session()
