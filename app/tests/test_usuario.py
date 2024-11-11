@@ -20,6 +20,16 @@ def test_email_valido(usuario_valido):
 def test_senha_valida(usuario_valido):
     assert usuario_valido.senha == "12345"
 
+def test_invalida_nome():
+    with pytest.raises(TypeError, match="O nome deve ser um texto !"):
+        Usuario(999, "maria123@gmail.com", "12345")
 
+def test_invalida_email():
+    with pytest.raises(TypeError, match="O email deve ser um texto !"):
+        Usuario("maria", 12345, "12345")
+
+def test_invalida_senha():
+    with pytest.raises(TypeError, match="A senha deve ser um texto !"):
+        Usuario("maria", "maria123@gmail.com", 12345)
 
     
