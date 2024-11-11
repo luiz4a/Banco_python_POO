@@ -18,8 +18,8 @@ class Usuario(Base):
         self.senha = self._verificar_senha_usuario(senha)
 
     def _verificar_nome_usuario(self, nome):
-        self._verificar_nome_invalido(nome)  # Verifica se o nome é inválido primeiro
-        self._verificar_nome_vazio(nome)      # Depois verifica se está vazio
+        self._verificar_nome_invalido(nome)  
+        self._verificar_nome_vazio(nome)    
         return nome
 
     def _verificar_email_usuario(self, email):
