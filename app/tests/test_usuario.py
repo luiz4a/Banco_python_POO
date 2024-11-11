@@ -5,31 +5,29 @@ import os
 
 os.system("cls||clear")
 
-@pytest.fixture 
+import pytest
+from app.models.usuario_models import Usuario
 
-def usuario_valido():
-    usuario = Usuario("maria", "maria123@gmail.com", "12345")
-    return usuario
+def test_usuario_nome_vazio_retorna_mensagem_erro():
+    with pytest.raises(ValueError, match="O que está sendo solicitado está vazio."):
+        Usuario("", "maria123@gmail.com", "12345")
 
-def test_nome_valido(usuario_valido):
-    assert usuario_valido.nome == "maria"
+def test_usuario_nome_invalido_erro():
+    with pytest.raises(TypeError, match="O que está sendo solicitado está inválido."):
+        Usuario(000, "maria123@gmail.com", "12345") 
 
-def test_email_valido(usuario_valido):
-    assert usuario_valido.email == "maria123@gmail.com"
+def test_usuario_email_vazio_retorna_mensagem_erro():
+    with pytest.raises(ValueError, match="O que está sendo solicitado está vazio."):
+        Usuario("maria", "", "12345")
 
-def test_senha_valida(usuario_valido):
-    assert usuario_valido.senha == "12345"
+def test_usuario_email_invalido_erro():
+    with pytest.raises(TypeError, match="O que está sendo solicitado está inválido."):
+        Usuario("maria", 000, "12345")  
 
-def test_invalida_nome():
-    with pytest.raises(TypeError, match="O nome deve ser um texto !"):
-        Usuario(999, "maria123@gmail.com", "12345")
+def test_usuario_senha_vazio_retorna_mensagem_erro():
+    with pytest.raises(ValueError, match="O que está sendo solicitado está vazio."):
+        Usuario("maria", "maria123@gmail.com", "")
 
-def test_invalida_email():
-    with pytest.raises(TypeError, match="O email deve ser um texto !"):
-        Usuario("maria", 12345, "12345")
-
-def test_invalida_senha():
-    with pytest.raises(TypeError, match="A senha deve ser um texto !"):
-        Usuario("maria", "maria123@gmail.com", 12345)
-
-    
+def test_usuario_senha_invalido_erro():
+    with pytest.raises(TypeError, match="O que está sendo solicitado está inválido."):
+        Usuario("maria", "maria123@gmail.com", 12345)  

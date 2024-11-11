@@ -5,25 +5,56 @@ from app.config.database import db
 Base = declarative_base()
 
 class Usuario(Base):
-    #Definindo caracteristicas da tabela no banco de dados.
     __tablename__ = "usuarios"
 
-    id = Column (Integer, primary_key = True, autoincrement=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     nome = Column(String(150))
-    email = Column(String(150), unique=True) #unique=True não aceita email ou dado repetido 
+    email = Column(String(150), unique=True)
     senha = Column(String(150))
 
-    #Definindo caracteristicas da classe.
     def __init__(self, nome: str, email: str, senha: str):
-        if not isinstance(nome, str):
-            raise TypeError("O nome deve ser um texto !")
-        if not isinstance(email, str):
-            raise TypeError("O email deve ser um texto !")
-        if not isinstance(senha, str):
-            raise TypeError("A senha deve ser um texto !")
-        self.nome = nome 
-        self.email = email 
-        self.senha = senha 
+        self.nome = self._verificar_nome_usuario(nome)
+        self.email = self._verificar_email_usuario(email)
+        self.senha = self._verificar_senha_usuario(senha)
 
-#Criando Tabela no banco de dados.
+    def _verificar_nome_usuario(self, nome):
+        self._verificar_nome_invalido(nome)  # Verifica se o nome é inválido primeiro
+        self._verificar_nome_vazio(nome)      # Depois verifica se está vazio
+        return nome
+
+    def _verificar_email_usuario(self, email):
+        self._verificar_email_invalido(email)
+        self._verificar_email_vazio(email)
+        return email
+
+    def _verificar_senha_usuario(self, senha):
+        self._verificar_senha_vazio(senha)
+        self._verificar_senha_invalido(senha)
+        return senha
+
+    def _verificar_nome_vazio(self, nome):
+        if nome == "":
+            raise ValueError("O que está sendo solicitado está vazio.")
+
+    def _verificar_nome_invalido(self, nome):
+        if not isinstance(nome, str):
+            raise TypeError("O que está sendo solicitado está inválido.")
+
+    def _verificar_email_vazio(self, email):
+        if email == "":
+            raise ValueError("O que está sendo solicitado está vazio.")
+
+    def _verificar_email_invalido(self, email):
+        if not isinstance(email, str):
+            raise TypeError("O que está sendo solicitado está inválido.")
+
+    def _verificar_senha_vazio(self, senha):
+        if senha == "":
+            raise ValueError("O que está sendo solicitado está vazio.")
+
+    def _verificar_senha_invalido(self, senha):
+        if not isinstance(senha, str):
+            raise TypeError("O que está sendo solicitado está inválido.")
+
+# Criação da tabela no banco de dados
 Base.metadata.create_all(bind=db)
