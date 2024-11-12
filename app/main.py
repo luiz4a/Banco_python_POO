@@ -70,25 +70,25 @@ def main():
             print(f"4- Excluir Usuário")
             print(f"5- Listar Usuário")
             print(f"0- Sair")
-            opcao = int(input("Digite a opção desejada: "))
+            opcao =input("Digite a opção desejada: ")
             match opcao: 
-                case 1:
+                case "1":
                     cadastrar_usuario()
             
 
-                case 2:
+                case "2":
                     consultar_usuario()
 
 
-                case 3:
+                case "3":
                     atualizar_cadastro()
                 
-                case 4:
+                case "4":
                     excluir_cadastro()
 
-                case 5:
+                case "5":
                     listar_usuarios()
-                case 0:
+                case "0":
                     print(f"Saindo do sistema...")
                     break
                 case _:
